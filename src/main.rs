@@ -1,6 +1,10 @@
-mod lexer_enum;
-use lexer_enum::token as l;
+mod lexer;
+use lexer::*;
+use lexer::token as token;
+use lexer::token::Token as TokenEnum;
 
 fn main() {
-  l::map(l::Token::TokDef)
+  token::map(TokenEnum::TokDef);
+  let lexer = Lexer::new();
+  dbg!(lexer.get_next_token());
 }
