@@ -1,37 +1,57 @@
+pub mod token;
+use token::Token;
 // interface
 
 pub trait Gettok {
-    fn gettok(&self) -> i64;
+    fn gettok(&self) -> Token;
 }
 
 pub trait GetNextToken {
-    fn get_next_token(&self) -> i64;
+    fn get_next_token(&self) -> Token;
+}
+
+pub trait Copy {
+    fn copy(&self) -> Lexer;
+}
+
+pub trait Clone {
+    fn clone(&self) -> Lexer;
 }
 
 // struct
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
 pub struct Lexer {
-    current_token: i64
+    current_token: Token
 }
 
 impl Lexer {
     pub fn new() -> Lexer {
         Lexer{
-            current_token: 0
+            current_token: Token::TokEof
         }
     }
 }
 
 impl Gettok for Lexer {
-    fn gettok(&self) -> i64 {
+    fn gettok(&self) -> Token {
         return self.current_token.clone();
     }
 }
 
 impl GetNextToken for Lexer {
-    fn get_next_token(&self) -> i64 {
+    fn get_next_token(&self) -> Token {
         return self.current_token.clone();
     }
 }
 
-pub mod token;
+impl Copy for Lexer { 
+    fn copy(&self) -> Lexer {
+        *self
+    }
+}
+
+impl Clone for Lexer {
+    fn clone(&self) -> Lexer {
+        *self
+    }
+}
