@@ -1,13 +1,22 @@
 pub mod token;
 use token::Token;
+use std::io;
+use std::io::Write;
+
+// struct
+#[derive(Debug, Copy, Clone)]
+pub struct Lexer {
+    current_token: Token
+}
+
 // interface
 
 pub trait Gettok {
-    fn gettok(&self) -> Token;
+    fn gettok(&mut self) -> Token;
 }
 
 pub trait GetNextToken {
-    fn get_next_token(&self) -> Token;
+    fn get_next_token(&mut self) -> Token;
 }
 
 pub trait Copy {
@@ -18,11 +27,7 @@ pub trait Clone {
     fn clone(&self) -> Lexer;
 }
 
-// struct
-#[derive(Debug, Copy, Clone)]
-pub struct Lexer {
-    current_token: Token
-}
+// Implement
 
 impl Lexer {
     pub fn new() -> Lexer {
@@ -33,13 +38,27 @@ impl Lexer {
 }
 
 impl Gettok for Lexer {
-    fn gettok(&self) -> Token {
+    fn gettok(&mut self) -> Token {
+        
+        print!("Ready >> ");
+        let _ = io::stdout().flush();
+
+        let mut input = String::new();
+
+        match io::stdin().read_line(&mut input) {
+            Ok(_n) => {
+                println!("{}", input);
+            }
+            Err(error) => println!("error: {}", error),
+        }
+
         return self.current_token.clone();
     }
 }
 
 impl GetNextToken for Lexer {
-    fn get_next_token(&self) -> Token {
+    fn get_next_token(&mut self) -> Token {
+        self.current_token = self.gettok();
         return self.current_token.clone();
     }
 }

@@ -3,8 +3,8 @@ use lexer::*;
 use lexer::token::Token as TokenEnum;
 
 fn main_loop() {
-  let lexer = Lexer::new();
-  dbg!(lexer.get_next_token());
+
+  let mut lexer = Lexer::new();
   let cur_token: TokenEnum;
 
   cur_token = lexer.get_next_token();
