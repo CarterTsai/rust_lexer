@@ -1,16 +1,16 @@
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy)]
 pub enum Token {
-  // xxx
-  TokEof = -1,
-  // commands
-  TokDef = -2,
-  // xx
-  TokExtern = -3,
-  // primary
-  TokIdentifier = -4,
-  // xx
-  TokNumber = -5,
+    Identifier = 1,
+    Keyword    = 2,
+    Integer    = 3,
+    Whitespace = 4,
+    Operator   = 5,
+    End        = 6,
+    Unknow     = 7,
+    Bracket    = 8,
+    Comma      = 9,
+    Quotation  = 10,
 }
 
 pub trait Copy {

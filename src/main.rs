@@ -9,11 +9,16 @@ fn main_loop() {
 
   while let Some(cur_token) = cur_tokens.pop() {
     match cur_token {
-      TokenEnum::TokEof => println!("TokEof!"),
-      TokenEnum::TokExtern => println!("TokExtern!"),
-      TokenEnum::TokIdentifier => println!("TokIdentifier!"),
-      TokenEnum::TokNumber => println!("TokNumber!"),
-      TokenEnum::TokDef => println!("TokDef!"),
+      TokenEnum::End => println!("End!"),
+      TokenEnum::Identifier => println!("TokIdentifier!"),
+      TokenEnum::Integer => println!("Integer!"),
+      TokenEnum::Keyword => println!("Keyword!"),
+      TokenEnum::Whitespace => println!("Whitespace"),
+      TokenEnum::Operator   => println!("Operator"),
+      TokenEnum::Unknow     => println!("Unknow"),
+      TokenEnum::Bracket    => println!("Bracket"),
+      TokenEnum::Comma      => println!("Comma"),
+      TokenEnum::Quotation  => println!("Quotation"),
     }
   }
 }

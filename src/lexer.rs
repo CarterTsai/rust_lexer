@@ -33,7 +33,7 @@ pub trait Clone {
 impl Lexer {
     pub fn new() -> Lexer {
         Lexer{
-            current_token: Token::TokEof
+            current_token: Token::End
         }
     }
 }
@@ -50,18 +50,13 @@ impl Gettok for Lexer {
             let input_char = input[0] as char;
             println!("CHAR {:?}", input[0] as char);
 
-            if input_char == '+' { collect_tokens.push(Token::TokIdentifier) };
-            if input_char == '-' { collect_tokens.push(Token::TokIdentifier) };
-            if input_char == '*' { collect_tokens.push(Token::TokIdentifier) };
-            if input_char == '/' { collect_tokens.push(Token::TokIdentifier) };
-
             // Digit
             if input_char.is_digit(10) {
-                collect_tokens.push(Token::TokNumber);
+                collect_tokens.push(Token::Integer);
             }
             // EOF
             if input_char == ';' {
-                collect_tokens.push(Token::TokEof);
+                collect_tokens.push(Token::End);
                 return collect_tokens;
             }
         }
