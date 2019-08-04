@@ -25,7 +25,7 @@ pub trait Atom {
 }
 
 pub trait Parse {
-    fn parse(&mut self) -> Vec<Token>;
+    fn parse(&mut self, _token: &str) -> Vec<String>;
 }
 
 pub trait Copy {
@@ -88,29 +88,10 @@ impl Atom for Lexer {
 }
 
 impl Parse for Lexer {
-    fn parse(&mut self) -> Vec<Token> {
-        let mut collect_tokens: Vec<Token> = vec![];
-        print!("Ready >> ");
-        let _ = io::stdout().flush();
-
-        let mut input = [0];
-
-        while let Ok(_) = io::stdin().read(&mut input) {
-            let input_char = input[0] as char;
-            println!("CHAR {:?}", input[0] as char);
-
-            // Digit
-            if input_char.is_digit(10) {
-                collect_tokens.push(Token::Integer);
-            }
-            // EOF
-            if input_char == ';' {
-                collect_tokens.push(Token::End);
-                return collect_tokens;
-            }
-        }
-
-        return collect_tokens;
+    fn parse(&mut self, _token: &str) -> Vec<String> {
+        let mut tokens: Vec<String> = self.tokenize(_token); 
+        let data: Vec<String> = self.read_from_tokens(&mut tokens);
+        data
     }
 }
 

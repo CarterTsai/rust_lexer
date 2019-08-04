@@ -9,6 +9,9 @@ fn main_loop() {
   println!("{:?}", tokens);
   let y = lexer.read_from_tokens(&mut tokens);
   println!("{:?}", y);
+
+  let z = lexer.parse("(begin (define r 10) (* pi (* r r)))");
+  println!("{:?}", z);
   
   // let mut cur_tokens = lexer.get_next_token();
 
